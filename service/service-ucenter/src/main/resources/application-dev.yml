@@ -1,6 +1,6 @@
 #### application-dev.yml
 server:
-  port: 8006
+  port: 8160
 
 spring:
   # 开发环境配置
@@ -58,3 +58,13 @@ mybatis-plus:
     db-config:
       logic-delete-value: 1
       logic-not-delete-value: 0
+
+# 微信开放平台
+wx:
+  open:
+    # appid
+    app_id: wxed9954c01bb89b47
+    # appsecret
+    app_secret: a7482517235173ddb4083788de60b90e
+    # 重定向url
+    redirect_url: http://localhost:8160/api/ucenter/wx/callback

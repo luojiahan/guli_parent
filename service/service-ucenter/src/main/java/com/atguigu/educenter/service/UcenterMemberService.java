@@ -24,4 +24,7 @@ public interface UcenterMemberService extends IService<UcenterMember> {
 
     // 根据token获取登录信息
     LoginInfoVo getLoginInfo(String memberId);
+
+    // 查询数据库当前用用户是否曾经使用过微信登录
+    UcenterMember getByOpenid(String openid);
 }

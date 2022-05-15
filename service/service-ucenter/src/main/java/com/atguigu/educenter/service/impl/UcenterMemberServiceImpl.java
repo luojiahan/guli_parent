@@ -110,4 +110,14 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         BeanUtils.copyProperties(ucenterMember, loginInfoVo);
         return loginInfoVo;
     }
+
+    // 查询数据库当前用用户是否曾经使用过微信登录
+    @Override
+    public UcenterMember getByOpenid(String openid) {
+        QueryWrapper<UcenterMember> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("openid", openid);
+
+        UcenterMember member = baseMapper.selectOne(queryWrapper);
+        return member;
+    }
 }
