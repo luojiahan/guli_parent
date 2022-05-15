@@ -1,0 +1,6 @@
+#### application.yml
+spring:
+  application:
+    name: service-msm
+  profiles:
+    active: dev

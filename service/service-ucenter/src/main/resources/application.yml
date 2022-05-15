@@ -1,0 +1,6 @@
+#### application.yml
+spring:
+  application:
+    name: service-ucenter
+  profiles:
+    active: dev

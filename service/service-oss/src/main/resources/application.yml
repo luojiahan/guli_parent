@@ -1,0 +1,6 @@
+#### application.yml
+spring:
+  application:
+    name: service-oss
+  profiles:
+    active: dev
