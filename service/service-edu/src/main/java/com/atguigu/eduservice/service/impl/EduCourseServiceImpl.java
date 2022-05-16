@@ -3,6 +3,7 @@ package com.atguigu.eduservice.service.impl;
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.EduCourseDescription;
 import com.atguigu.eduservice.entity.EduVideo;
+import com.atguigu.eduservice.entity.frontVo.CourseFrontVo;
 import com.atguigu.eduservice.entity.vo.CourseInfoVo;
 import com.atguigu.eduservice.entity.vo.CoursePublishVo;
 import com.atguigu.eduservice.entity.vo.CourseQuery;
@@ -19,6 +20,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -178,4 +183,83 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         int result = baseMapper.deleteById(id);
         return result > 0;
     }
+
+    /**
+     * 根据讲师id查询当前讲师的课程列表
+     * @param teacherId
+     * @return
+     */
+    @Override
+    public List<EduCourse> selectByTeacherId(String teacherId) {
+        QueryWrapper<EduCourse> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("teacher_id", teacherId);
+        //按照最后更新时间倒序排列
+        queryWrapper.orderByDesc("gmt_modified");
+        List<EduCourse> courses = baseMapper.selectList(queryWrapper);
+        return courses;
+    }
+
+    // 前台多条件分页查询
+    @Override
+    public Map<String, Object> getCourseFrontInfo(Page<EduCourse> pageCourse, CourseFrontVo courseFrontVo) {
+        String title = null;
+        String subjectId = null;
+        String subjectParentId = null;
+        String gmtCreateSort = null;
+        String buyCountSort = null;
+        String priceSort = null;
+        String teacherId = null;
+
+        if (!StringUtils.isEmpty(courseFrontVo)){
+            title = courseFrontVo.getTitle();
+            subjectId = courseFrontVo.getSubjectId();
+            subjectParentId = courseFrontVo.getSubjectParentId();
+            gmtCreateSort = courseFrontVo.getGmtCreateSort();
+            buyCountSort = courseFrontVo.getBuyCountSort();
+            priceSort = courseFrontVo.getPriceSort();
+            teacherId = courseFrontVo.getTeacherId();
+        }
+
+
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        //判断条件值是否为空，不为空拼接条件
+        if (!StringUtils.isEmpty(subjectParentId)){//一级分类
+            wrapper.eq("subject_parent_id",subjectParentId);
+        }
+        if (!StringUtils.isEmpty(subjectId)){//二级分类
+            wrapper.eq("subject_id",subjectId);
+        }
+        if (!StringUtils.isEmpty(buyCountSort)){//关注度
+            wrapper.orderByDesc("buy_count");
+        }
+        if (!StringUtils.isEmpty(priceSort)){//价格
+            wrapper.orderByDesc("price");
+        }
+        if (!StringUtils.isEmpty(gmtCreateSort)){//最新，创建时间
+            wrapper.orderByDesc("gmt_create");
+        }
+
+
+        baseMapper.selectPage(pageCourse, wrapper);
+
+        long total = pageCourse.getTotal();//总记录数
+        List<EduCourse> courseList = pageCourse.getRecords();//数据集合
+        long size = pageCourse.getSize();//每页记录数
+        long current = pageCourse.getCurrent();//当前页
+        long pages = pageCourse.getPages();//总页数
+        boolean hasPrevious = pageCourse.hasPrevious();//是否有上一页
+        boolean hasNext = pageCourse.hasNext();//是否有下一页
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("total",total);
+        map.put("list",courseList);
+        map.put("size",size);
+        map.put("current",current);
+        map.put("pages",pages);
+        map.put("hasPrevious",hasPrevious);
+        map.put("hasNext",hasNext);
+
+        return map;
+    }
+
 }

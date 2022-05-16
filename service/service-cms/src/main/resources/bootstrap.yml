@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: service-cms
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        # 配置中心地址
+        server-addr: 127.0.0.1:8848
+        # 配置文件格式
+        file-extension: yml
+        shared-configs:
+          - ${prefix}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+        namespace: b9338d43-bb30-455d-92d4-2370e5b3806b
+      discovery:
+        server-addr: 127.0.0.1:8848

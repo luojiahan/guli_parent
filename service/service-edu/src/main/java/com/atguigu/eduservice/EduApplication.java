@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,6 +17,7 @@ import java.net.UnknownHostException;
 @SpringBootApplication
 @EnableFeignClients
 @ComponentScan(basePackages = "com.atguigu")
+@RefreshScope
 public class EduApplication {
     public static void main(String[] args) throws UnknownHostException {
 

@@ -9,20 +9,8 @@ spring:
   # cloud 配置
   cloud:
     nacos:
-#      username: guli
-#      password: guli
       discovery:
         server-addr: 127.0.0.1:8848
-#        namespace: fe69289c-128a-404a-a699-93e15b33a5ce
-#    config:
-#      # 配置中心地址
-#      server-addr: 127.0.0.1:8848
-#      # 配置文件格式
-#      file-extension: yml
-#      # 共享配置
-#      shared-configs:
-#        - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
-#      namespace: fe69289c-128a-404a-a699-93e15b33a5ce
   # 数据库配置
   datasource:
     type: com.zaxxer.hikari.HikariDataSource

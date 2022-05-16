@@ -9,6 +9,7 @@ import com.atguigu.educenter.entity.vo.LoginVo;
 import com.atguigu.educenter.entity.vo.RegisterVo;
 import com.atguigu.educenter.service.UcenterMemberService;
 import com.atguigu.servicebase.exceptiohandler.GuliException;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author atguigu
  * @since 2022-05-14
  */
+@Api(tags = "会员接口")
 @RestController
 @CrossOrigin
 @RequestMapping("/educenter/member")

@@ -1,8 +1,10 @@
 package com.atguigu.eduservice.controller;
 
 import com.atguigu.commonutils.R;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
+@Api(tags = "用户登录（测试）")
 @RestController
 @CrossOrigin //解决跨域问题
 @RequestMapping("/eduservice/user")
