@@ -37,8 +37,8 @@ public class SwaggerConfig {
                 .title("智能工作台测试API文档")
                 .description("本文档描述了智能工作台微服务接口定义")
                 .version("1.0")
-                .contact(new Contact("Helen", "http://www.test.com",
-                        "test@qq.com"))
+//                .contact(new Contact("Helen", "http://www.test.com",
+//                        "test@qq.com"))
                 .build();
     }
 }

@@ -9,6 +9,8 @@ import com.atguigu.educenter.utils.ConstantPropertiesUtil;
 import com.atguigu.educenter.utils.HttpClientUtils;
 import com.atguigu.servicebase.exceptiohandler.GuliException;
 import com.google.gson.Gson;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 
+@Api(tags = "微信登录")
 @Controller//注意这里没有配置 @RestController
 @CrossOrigin
 @RequestMapping("/api/ucenter/wx")
@@ -31,6 +34,7 @@ public class WxApiController {
     private UcenterMemberService memberService;
 
     // 生成微信扫描二维码
+    @ApiOperation(value = "微信登录扫描二维码")
     @GetMapping("login")
     public String genQrConnect(HttpSession session) {
         // 微信开放平台授权baseUrl
@@ -68,7 +72,9 @@ public class WxApiController {
 
         return "redirect:" + qrcodeUrl;
     }
+
     // 获取扫码信息，添加数据
+    @ApiOperation(value = "微信登录callback")
     @GetMapping("callback")
     public String callback(String code, String state) {
         //得到授权临时票据code

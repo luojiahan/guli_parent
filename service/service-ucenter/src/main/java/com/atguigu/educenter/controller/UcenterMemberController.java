@@ -7,10 +7,13 @@ import com.atguigu.educenter.entity.UcenterMember;
 import com.atguigu.educenter.entity.vo.LoginInfoVo;
 import com.atguigu.educenter.entity.vo.LoginVo;
 import com.atguigu.educenter.entity.vo.RegisterVo;
+import com.atguigu.educenter.entity.vo.UcenterMemberVo;
 import com.atguigu.educenter.service.UcenterMemberService;
 import com.atguigu.servicebase.exceptiohandler.GuliException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +39,9 @@ public class UcenterMemberController {
     // 登录
     @ApiOperation(value = "会员登录")
     @PostMapping("login")
-    public R loginUser(@RequestBody LoginVo loginVo) {
+    public R loginUser(
+            @ApiParam(name = "loginVo", value = "会员登录信息对象", required = true)
+            @RequestBody LoginVo loginVo) {
         // 调用service方法实现登录
         // 返回token值，使用jwt生成
         String token = memberService.login(loginVo);
@@ -45,7 +50,9 @@ public class UcenterMemberController {
     // 注册
     @ApiOperation(value = "会员注册")
     @PostMapping("register")
-    public R register(@RequestBody RegisterVo registerVo){
+    public R register(
+            @ApiParam(name = "registerVo", value = "会员注册信息对象", required = true)
+            @RequestBody RegisterVo registerVo){
         memberService.register(registerVo);
         return R.ok();
     }
@@ -62,6 +69,19 @@ public class UcenterMemberController {
             e.printStackTrace();
             throw new GuliException(20001,"error");
          }
+    }
+
+    // 根据会员id字符串获取用户信息
+    @ApiOperation(value = "根据会员id字符串获取用户信息")
+    @PostMapping("getInfoUc/{memberId}")
+    public UcenterMemberVo getInfo(
+            @ApiParam(name = "memberId", value = "会员id", required = true)
+            @PathVariable String memberId) {
+        //根据用户id获取用户信息
+        UcenterMember ucenterMember = memberService.getById(memberId);
+        UcenterMemberVo memeberVo = new UcenterMemberVo();
+        BeanUtils.copyProperties(ucenterMember,memeberVo);
+        return memeberVo;
     }
 }
 
