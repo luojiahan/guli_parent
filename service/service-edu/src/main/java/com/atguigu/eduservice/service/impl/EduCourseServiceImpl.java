@@ -4,6 +4,7 @@ import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.EduCourseDescription;
 import com.atguigu.eduservice.entity.EduVideo;
 import com.atguigu.eduservice.entity.frontVo.CourseFrontVo;
+import com.atguigu.eduservice.entity.frontVo.CourseWebVo;
 import com.atguigu.eduservice.entity.vo.CourseInfoVo;
 import com.atguigu.eduservice.entity.vo.CoursePublishVo;
 import com.atguigu.eduservice.entity.vo.CourseQuery;
@@ -252,7 +253,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("total",total);
-        map.put("list",courseList);
+        map.put("items",courseList);
         map.put("size",size);
         map.put("current",current);
         map.put("pages",pages);
@@ -262,4 +263,16 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         return map;
     }
 
+    @Override
+    public CourseWebVo getBaseCourseInfo(String courseId) {
+//        this.updatePageViewCount(id);
+        return baseMapper.getBaseCourseInfo(courseId);
+    }
+
+//    @Override
+//    public void updatePageViewCount(String id) {
+//        Course course = baseMapper.selectById(id);
+//        course.setViewCount(course.getViewCount() + 1);
+//        baseMapper.updateById(course);
+//    }
 }

@@ -2,6 +2,7 @@ package com.atguigu.eduservice.service;
 
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.frontVo.CourseFrontVo;
+import com.atguigu.eduservice.entity.frontVo.CourseWebVo;
 import com.atguigu.eduservice.entity.vo.CourseInfoVo;
 import com.atguigu.eduservice.entity.vo.CoursePublishVo;
 import com.atguigu.eduservice.entity.vo.CourseQuery;
@@ -47,4 +48,7 @@ public interface EduCourseService extends IService<EduCourse> {
 
     //前台多条件分页查询
     Map<String, Object> getCourseFrontInfo(Page<EduCourse> pageCourse, CourseFrontVo courseFrontVo);
+
+    // 查询课程信息和讲师信息
+    CourseWebVo getBaseCourseInfo(String courseId);
 }

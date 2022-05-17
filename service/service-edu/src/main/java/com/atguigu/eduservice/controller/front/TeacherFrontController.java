@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "讲师前台页面")
+@Api(tags = "前台讲师管理接口")
 @RestController
 @RequestMapping("/eduservice/teacherfront")
 @CrossOrigin
