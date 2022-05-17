@@ -1,7 +1,13 @@
 package com.atguigu.vod.controller;
 
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import com.atguigu.commonutils.R;
+import com.atguigu.servicebase.exceptiohandler.GuliException;
 import com.atguigu.vod.service.VodService;
+import com.atguigu.vod.utils.AliyunVodSDKUtils;
+import com.atguigu.vod.utils.ConstantPropertiesUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -47,6 +53,17 @@ public class VodController {
             @RequestParam("videoIdList") List videoIdList){
         vodService.removeVideoList(videoIdList);
         return R.ok().message("视频删除成功");
+    }
+
+    // 根据视频id获取视频凭证
+    @ApiOperation(value = "根据视频id获取视频凭证")
+    @GetMapping("getPlayAuth/{videoId}")
+    public R getVideoPlayAuth(
+            @ApiParam(name = "videoId", value = "云端视频id", required = true)
+            @PathVariable("videoId") String videoId) {
+
+        String playAuth = vodService.getVideoPlayAuth(videoId);
+        return R.ok().message("获取凭证成功").data("playAuth", playAuth);
     }
 
 }

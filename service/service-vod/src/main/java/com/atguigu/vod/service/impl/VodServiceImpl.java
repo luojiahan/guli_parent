@@ -7,6 +7,9 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoResponse;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
+import com.atguigu.commonutils.R;
 import com.atguigu.servicebase.exceptiohandler.GuliException;
 import com.atguigu.vod.service.VodService;
 import com.atguigu.vod.utils.AliyunVodSDKUtils;
@@ -102,4 +105,29 @@ public class VodServiceImpl implements VodService {
             throw new GuliException(20001, "视频删除失败");
         }
     }
+
+    // 根据视频id获取视频凭证
+    @Override
+    public String getVideoPlayAuth(String videoId) {
+        try{
+            // 获取阿里云存储相关常量
+            String accessKeyId = ConstantPropertiesUtil.ACCESS_KEY_ID;
+            String accessKeySecret = ConstantPropertiesUtil.ACCESS_KEY_SECRET;
+            // 初始化
+            DefaultAcsClient client = AliyunVodSDKUtils.initVodClient(accessKeyId, accessKeySecret);
+            // 请求
+            GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
+            request.setVideoId(videoId);
+            // 响应
+            GetVideoPlayAuthResponse response = client.getAcsResponse(request);
+            // 得到播放凭证
+            String playAuth = response.getPlayAuth();
+            // 返回结果
+            return playAuth;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new GuliException(20001, "获取凭证失败");
+        }
+    }
+
 }
