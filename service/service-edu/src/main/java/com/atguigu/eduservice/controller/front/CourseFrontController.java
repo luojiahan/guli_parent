@@ -56,7 +56,6 @@ public class CourseFrontController {
 
         // 根据课程id查询章节和小节
         List<ChapterVo> chapterVoList = chapterService.getChapterVideoByCourseId(courseId);
-        return R.ok().data("course", courseWebVo).data("chapterVoList",
-                chapterVoList);
+        return R.ok().data("course", courseWebVo).data("chapterVoList",  chapterVoList);
     }
 }

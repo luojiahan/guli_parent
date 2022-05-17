@@ -1,9 +1,24 @@
 package com.atguigu.eduservice.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.atguigu.commonutils.JwtUtils;
+import com.atguigu.commonutils.R;
+import com.atguigu.commonutils.UcenterMemberVo;
+import com.atguigu.eduservice.client.UcenterClient;
+import com.atguigu.eduservice.entity.EduComment;
+import com.atguigu.eduservice.service.EduCommentService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -14,7 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2022-05-17
  */
 @RestController
-@RequestMapping("/eduservice/edu-comment")
+@RequestMapping("/eduservice/comment")
+@CrossOrigin
 public class EduCommentController {
 
 }
