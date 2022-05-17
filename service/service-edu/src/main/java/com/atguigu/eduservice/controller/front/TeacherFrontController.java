@@ -50,13 +50,13 @@ public class TeacherFrontController {
     /**
      * 根据讲师id查询当前讲师的课程列表
      * @param teacherId 讲师id
-     * @return 讲师和课程的JSON列表
+     * @return teacher and courseList
      */
     @ApiOperation(value = "根据ID查询讲师")
-    @GetMapping(value = "getTeacherInfo/{teacherId}")
-    public R getById(
+    @GetMapping(value = "getTeacherFrontInfo/{teacherId}")
+    public R getTeacherFrontInfo(
             @ApiParam(name = "id", value = "讲师ID", required = true)
-            @PathVariable String teacherId) {
+            @PathVariable String teacherId){
         // 查询讲师信息
         EduTeacher teacher = teacherService.getById(teacherId);
         // 根据讲师id查询这个讲师的课程列表
