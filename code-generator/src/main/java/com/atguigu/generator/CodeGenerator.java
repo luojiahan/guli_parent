@@ -22,14 +22,10 @@ public class CodeGenerator {
 
         String configFile = "application.properties";
         //2、设置数据库对应的table
-        String[] tables = new String[] {"edu_teacher"};
-        // 用来获取配置信息
-        Properties rb = new Properties();
-        rb.load(new ClassPathResource(configFile).getInputStream());
-        System.out.println(rb.getProperty("mp.tables"));
+        String[] tables = new String[] {"t_order", "t_pay_log"};
 
-//        CodeGenerator.generate(configFile, tables, false);
-//        CodeGenerator.generate(configFile, tables, true);
+        CodeGenerator.generate(configFile, tables, false);
+        CodeGenerator.generate(configFile, tables, true);
 
     }
     public static void generate(String configFile, String[] tables, boolean entity) throws IOException {

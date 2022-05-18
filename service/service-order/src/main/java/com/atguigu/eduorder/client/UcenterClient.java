@@ -1,4 +1,4 @@
-package com.atguigu.eduservice.client;
+package com.atguigu.eduorder.client;
 
 import com.atguigu.commonutils.orderVo.UcenterMemberVo;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Component
-@FeignClient(name = "service-ucenter",fallback = UcenterClientImpl.class)
+@FeignClient("service-ucenter")
 public interface UcenterClient {
 
     // 根据会员id获取用户信息
     @PostMapping("/educenter/member/getUserInfo/{memberId}")
     public UcenterMemberVo getUserInfo(@PathVariable("memberId") String memberId);
+
 }

@@ -71,10 +71,10 @@ public class UcenterMemberController {
          }
     }
 
-    // 根据会员id字符串获取用户信息
-    @ApiOperation(value = "根据会员id字符串获取用户信息")
-    @PostMapping("getInfoUc/{memberId}")
-    public UcenterMemberVo getInfo(
+    // 根据会员id获取用户信息
+    @ApiOperation(value = "根据会员id获取用户信息")
+    @PostMapping("getUserInfo/{memberId}")
+    public UcenterMemberVo getUserInfo(
             @ApiParam(name = "memberId", value = "会员id", required = true)
             @PathVariable String memberId) {
         //根据用户id获取用户信息

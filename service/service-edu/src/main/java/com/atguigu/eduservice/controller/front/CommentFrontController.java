@@ -2,7 +2,7 @@ package com.atguigu.eduservice.controller.front;
 
 import com.atguigu.commonutils.JwtUtils;
 import com.atguigu.commonutils.R;
-import com.atguigu.commonutils.UcenterMemberVo;
+import com.atguigu.commonutils.orderVo.UcenterMemberVo;
 import com.atguigu.eduservice.client.UcenterClient;
 import com.atguigu.eduservice.entity.EduComment;
 import com.atguigu.eduservice.service.EduCommentService;
@@ -65,7 +65,7 @@ public class CommentFrontController {
             return R.error().code(28004).message("请登录");
         }
         comment.setMemberId(memberId);
-        UcenterMemberVo ucenterInfo = ucenterClient.getInfoUc(memberId);
+        UcenterMemberVo ucenterInfo = ucenterClient.getUserInfo(memberId);
         comment.setNickname(ucenterInfo.getNickname());
         comment.setAvatar(ucenterInfo.getAvatar());
         commentService.save(comment);
