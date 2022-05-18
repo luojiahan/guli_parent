@@ -27,4 +27,7 @@ public interface UcenterMemberService extends IService<UcenterMember> {
 
     // 查询数据库当前用用户是否曾经使用过微信登录
     UcenterMember getByOpenid(String openid);
+
+    // 查询某一天的注册人数
+    Integer countRegisterByDay(String day);
 }
