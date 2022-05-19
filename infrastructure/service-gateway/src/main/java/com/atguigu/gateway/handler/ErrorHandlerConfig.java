@@ -17,6 +17,12 @@ import org.springframework.web.reactive.result.view.ViewResolver;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 覆盖默认的异常处理
+ *
+ * @author yinjihuan
+ *
+ */
 @Configuration
 @EnableConfigurationProperties({ServerProperties.class, ResourceProperties.class})
 public class ErrorHandlerConfig {
@@ -32,10 +38,10 @@ public class ErrorHandlerConfig {
     private final ServerCodecConfigurer serverCodecConfigurer;
 
     public ErrorHandlerConfig(ServerProperties serverProperties,
-                              ResourceProperties resourceProperties,
-                              ObjectProvider<List<ViewResolver>> viewResolversProvider,
-                              ServerCodecConfigurer serverCodecConfigurer,
-                              ApplicationContext applicationContext) {
+                                     ResourceProperties resourceProperties,
+                                     ObjectProvider<List<ViewResolver>> viewResolversProvider,
+                                        ServerCodecConfigurer serverCodecConfigurer,
+                                     ApplicationContext applicationContext) {
         this.serverProperties = serverProperties;
         this.applicationContext = applicationContext;
         this.resourceProperties = resourceProperties;

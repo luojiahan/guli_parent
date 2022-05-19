@@ -15,6 +15,14 @@ import reactor.core.publisher.Mono;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+/**
+ * <p>
+ * 全局Filter，统一处理会员登录与外部不允许访问的服务
+ * </p>
+ *
+ * @author qy
+ * @since 2019-11-21
+ */
 @Component
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
@@ -24,7 +32,6 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         String path = request.getURI().getPath();
-
         //谷粒学院api接口，校验用户必须登录
         if(antPathMatcher.match("/api/**/auth/**", path)) {
             List<String> tokenList = request.getHeaders().get("token");
@@ -34,12 +41,11 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
             } else {
 //                Boolean isCheck = JwtUtils.checkToken(tokenList.get(0));
 //                if(!isCheck) {
-                ServerHttpResponse response = exchange.getResponse();
-                return out(response);
+                    ServerHttpResponse response = exchange.getResponse();
+                    return out(response);
 //                }
             }
         }
-
         //内部服务接口，不允许外部访问
         if(antPathMatcher.match("/**/inner/**", path)) {
             ServerHttpResponse response = exchange.getResponse();
@@ -54,16 +60,13 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
     }
 
     private Mono<Void> out(ServerHttpResponse response) {
-
         JsonObject message = new JsonObject();
         message.addProperty("success", false);
         message.addProperty("code", 28004);
         message.addProperty("data", "鉴权失败");
-
         byte[] bits = message.toString().getBytes(StandardCharsets.UTF_8);
         DataBuffer buffer = response.bufferFactory().wrap(bits);
         //response.setStatusCode(HttpStatus.UNAUTHORIZED);
-
         //指定编码，否则在浏览器中会中文乱码
         response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
         return response.writeWith(Mono.just(buffer));
