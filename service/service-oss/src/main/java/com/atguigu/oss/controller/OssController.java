@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Api(tags="阿里云OSS")
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/eduoss/file/upload")
 public class OssController {
 

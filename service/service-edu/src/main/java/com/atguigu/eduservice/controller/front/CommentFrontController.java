@@ -23,7 +23,7 @@ import java.util.Map;
 @Api(tags = "前台评论接口")
 @RestController
 @RequestMapping("/eduservice/commentfront")
-@CrossOrigin
+//@CrossOrigin
 public class CommentFrontController {
 
     @Autowired

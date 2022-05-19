@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Api(tags = "会员接口")
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/educenter/member")
 public class UcenterMemberController {
 
