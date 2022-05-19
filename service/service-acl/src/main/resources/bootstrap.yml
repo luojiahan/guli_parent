@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: service-acl
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        # 配置中心地址
+        server-addr: 127.0.0.1:8848
+        namespace: b9338d43-bb30-455d-92d4-2370e5b3806b
+        # 配置文件格式
+        file-extension: yml
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: b9338d43-bb30-455d-92d4-2370e5b3806b
